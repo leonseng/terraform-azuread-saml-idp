@@ -6,13 +6,3 @@ variable "object_name_prefix" {
 variable "app_base_url" {
   type = string
 }
-
-variable "create_token_signing_cert_file" {
-  type    = bool
-  default = false
-}
-
-variable "token_signing_cert_file_output_dir" {
-  type    = string
-  default = "/tmp"
-}

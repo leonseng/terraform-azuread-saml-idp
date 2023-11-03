@@ -37,17 +37,6 @@ resource "azuread_service_principal_token_signing_certificate" "this" {
   service_principal_id = azuread_service_principal.this.id
 }
 
-resource "local_file" "token_signing_cert" {
-  count = var.create_token_signing_cert_file ? 1 : 0
-
-  content = templatefile("${path.module}/templates/saml_token_signing_cert.pem.tmpl",
-    {
-      token_signing_cert_key : azuread_service_principal_token_signing_certificate.this.value
-    }
-  )
-  filename = "${var.token_signing_cert_file_output_dir}/${local.name_prefix}.pem"
-}
-
 output "app_name" {
   value = azuread_application.this.display_name
 }
