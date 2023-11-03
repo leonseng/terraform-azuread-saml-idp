@@ -22,9 +22,7 @@ resource "azuread_application" "this" {
 
 # enterprise application with SAML SSO
 resource "azuread_service_principal" "this" {
-  # client_id = azuread_application.this.client_id
-  application_id = azuread_application.this.client_id
-
+  client_id                     = azuread_application.this.client_id
   preferred_single_sign_on_mode = "saml"
   login_url                     = var.app_base_url
 
