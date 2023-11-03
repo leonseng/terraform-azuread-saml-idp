@@ -40,6 +40,8 @@ resource "azuread_service_principal_token_signing_certificate" "this" {
 }
 
 resource "local_file" "token_signing_cert" {
+  count = var.create_token_signing_cert_file ? 1 : 0
+
   content = templatefile("${path.module}/templates/saml_token_signing_cert.pem.tmpl",
     {
       token_signing_cert_key : azuread_service_principal_token_signing_certificate.this.value
