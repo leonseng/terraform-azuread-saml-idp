@@ -5,14 +5,15 @@ resource "random_id" "id" {
 }
 
 locals {
-  name_prefix = random_id.id.dec
+  name_prefix   = random_id.id.dec
+  app_entity_id = "api://${local.name_prefix}"
 }
 
 resource "random_uuid" "appid" {}
 
 resource "azuread_application" "this" {
   display_name    = local.name_prefix
-  identifier_uris = ["api://${local.name_prefix}"]
+  identifier_uris = [local.app_entity_id]
 
   web {
     logout_url    = "${var.app_base_url}/saml/sls"
@@ -56,4 +57,8 @@ output "saml_idp_logout_url" {
 output "saml_idp_token_signing_cert_b64" {
   sensitive = true
   value     = azuread_service_principal_token_signing_certificate.this.value
+}
+
+output "saml_sp_entity_id" {
+  value = local.app_entity_id
 }
