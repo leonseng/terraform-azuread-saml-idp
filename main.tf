@@ -45,7 +45,7 @@ resource "local_file" "token_signing_cert" {
       token_signing_cert_key : azuread_service_principal_token_signing_certificate.this.value
     }
   )
-  filename = "${path.module}/${local.name_prefix}.pem"
+  filename = "${var.token_signing_cert_file_output_dir}/${local.name_prefix}.pem"
 }
 
 output "app_name" {
