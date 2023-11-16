@@ -1,4 +1,4 @@
-output "app_name" {
+output "enterprise_app_name" {
   value = azuread_application.this.display_name
 }
 

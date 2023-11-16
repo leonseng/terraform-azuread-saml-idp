@@ -15,7 +15,7 @@ output "saml_sp_entity_id" {
 }
 
 output "enterprise_app_name" {
-  value = module.idp.app_name
+  value = module.idp.enterprise_app_name
 }
 
 output "enterprise_app_oid" {
