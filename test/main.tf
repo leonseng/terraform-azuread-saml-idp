@@ -6,7 +6,15 @@ module "idp" {
   saml_sp_sls_url   = "https://azuread-saml-idp.example.com/saml/sls"
 }
 
-output "app_name" {
+output "saml_idp_entity_id" {
+  value = module.idp.saml_idp_entity_id
+}
+
+output "saml_sp_entity_id" {
+  value = module.idp.saml_sp_entity_id
+}
+
+output "enterprise_app_name" {
   value = module.idp.app_name
 }
 
