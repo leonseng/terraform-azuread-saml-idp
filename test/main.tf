@@ -1,7 +1,9 @@
 module "idp" {
-  source = "github.com/leonseng/terraform-azuread-saml-idp.git"
+  source = "../"
 
-  app_base_url = "https://azuread-saml-idp.example.com"
+  saml_sp_login_url = "https://azuread-saml-idp.example.com"
+  saml_sp_acs_url   = "https://azuread-saml-idp.example.com/saml/acs"
+  saml_sp_sls_url   = "https://azuread-saml-idp.example.com/saml/sls"
 }
 
 output "app_name" {
