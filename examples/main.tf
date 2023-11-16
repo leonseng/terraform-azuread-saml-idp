@@ -1,8 +1,7 @@
 module "idp" {
   source = "github.com/leonseng/terraform-azuread-saml-idp.git"
 
-  app_base_url                   = "https://azuread-saml-idp.example.com"
-  create_token_signing_cert_file = true
+  app_base_url = "https://azuread-saml-idp.example.com"
 }
 
 output "app_name" {
