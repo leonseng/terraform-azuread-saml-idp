@@ -24,5 +24,5 @@ output "saml_sp_entity_id" {
 }
 
 output "saml_idp_entity_id" {
-  value = "https://sts.windows.net/${data.azuread_client_config.current.tenant_id}"
+  value = "https://sts.windows.net/${data.azuread_client_config.current.tenant_id}/"
 }
