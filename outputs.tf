@@ -20,5 +20,5 @@ output "saml_idp_token_signing_cert_b64" {
 }
 
 output "saml_sp_entity_id" {
-  value = local.app_entity_id
+  value = local.saml_sp_entity_id
 }
