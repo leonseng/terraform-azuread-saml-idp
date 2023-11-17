@@ -37,3 +37,29 @@ resource "azuread_service_principal" "this" {
 resource "azuread_service_principal_token_signing_certificate" "this" {
   service_principal_id = azuread_service_principal.this.id
 }
+
+resource "azuread_application_certificate" "this" {
+  count = var.saml_sp_signing_cert == "" ? 0 : 1
+
+  application_id = azuread_application.this.id
+  type           = "AsymmetricX509Cert"
+  encoding       = "pem"
+  value          = file(var.saml_sp_signing_cert)
+}
+
+// Reference: https://github.com/hashicorp/terraform-provider-azuread/issues/1179
+resource "terraform_data" "app-requestSignatureVerification" {
+  count = var.saml_sp_signing_cert == "" ? 0 : 1
+
+  input = {
+    application_id = basename(azuread_application_certificate.this[0].application_id)
+  }
+
+  provisioner "local-exec" {
+    when    = create
+    command = <<-EOF
+        az ad app update --id '${self.input.application_id}' \
+            --set 'requestSignatureVerification={"isSignedRequestRequired":true}'
+    EOF
+  }
+}

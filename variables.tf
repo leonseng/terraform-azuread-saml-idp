@@ -23,3 +23,9 @@ variable "saml_sp_sls_url" {
   description = "Single Logout Service endpoint on SAML SP"
   type        = string
 }
+
+variable "saml_sp_signing_cert" {
+  description = "Absolute path to public key used to verify SAML messages signed by SP"
+  type        = string
+  default     = ""
+}
